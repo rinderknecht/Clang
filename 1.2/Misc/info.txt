@@ -1,0 +1,45 @@
+first(expression) = USHORT UNCHECKED ULONG UINT TYPEOF TRUE TIMES
+TILDE THIS String STRING SIZEOF SHORT SBYTE PLUS OBJECT NULL NEW MINUS
+LPAR LONG Int Ident INT Float FLOAT FALSE DPLUS DOUBLE DMINUS DECIMAL
+Char CHECKED CHAR BYTE BOOL BASE BANG AMPER
+
+first(_type) = VOID USHORT ULONG UINT STRING SHORT SBYTE OBJECT LONG
+Ident INT FLOAT DOUBLE DECIMAL CHAR BYTE BOOL
+
+Common: USHORT ULONG UINT STRING SHORT SBYTE OBJECT LONG Ident INT
+FLOAT DOUBLE DECIMAL CHAR BYTE BOOL
+
+1. f(x)                         f(x,y,z) f(x)(y) f(x,y)(z,w) f(x)(z,w) f(x,y)(z)
+2. (t)x et (t)(x) (f+f)(x)      (f)(x,y,z) (f+f)(x,y,z) (t)(u)x mais PAS (t)x,y,z et PAS (t+t)x
+
+
+expr = 
+| expr-sans-parenthses (expr2[, ...]) // 1.
+| (expr1)* (expr2[, ...])
+| (expr1)* expr-sans-parentheses
+
+
+   1                            4        11      44          41        14
+1. f(x)                         f(x,y,z) f(x)(y) f(x,y)(z,w) f(x)(z,w) f(x,y)(z)
+   2       2      3             5          5            22
+2. (t)x et (t)(x) (f+f)(x)      (f)(x,y,z) (f+f)(x,y,z) (t)(u)x
+
+
+2--+
+|  2--+
+|  |  1---+
+|  |  1+  |
+|  |  ||  |
+(t)(u)f(x)(y)
+
+
+
+expr-sans-rien =
+| expr1 + expr2
+| expr-sans-qualified DOT ident // member access
+| ...
+| expr-sans-parenthèse (expr2)                  // 1 = appel
+| (qualified) expr2                             // 2 = cast
+| (expr-sans-qualified) (expr2)                 // 3 = appel
+| expr-sans-parenthèse (expr2, expr3 [, ...])   // 4 = appel
+| (expr) (expr2, expr3 [, ...])                 // 5 = appel

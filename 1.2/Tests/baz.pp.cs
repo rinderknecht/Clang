@@ -1,0 +1,2 @@
+Ident(define)
+Ident(FOO)

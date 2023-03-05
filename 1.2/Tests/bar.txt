@@ -1,0 +1,8 @@
+Ident(f)(Ident(x))
+CAST(Ident(t))(Ident(g))
+CAST(Ident(t))Ident(g)
+(Ident(f)+Ident(f))(Ident(g))
+Ident(f)(Ident(x),Ident(y),Ident(z),Ident(t))
+(Ident(f)+Ident(f))(Ident(g))
+((Ident(f)))(Ident(g))
+CAST(Ident(f))(Ident(x),Ident(y),Ident(z),Ident(t))

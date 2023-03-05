@@ -1,0 +1,1 @@
+ocamlc: -principal -rectypes
